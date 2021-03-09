@@ -1,5 +1,6 @@
 ﻿using Activity1Part3.Models;
 using Activity1Part3.Services.Business;
+using Activity1Part3.Services.Utility;
 using Microsoft.AspNetCore.Mvc;
 using NLog;
 using System;
@@ -11,7 +12,6 @@ namespace Activity1Part3.Controllers
 {
     public class LoginController : Controller
     {
-        private static Logger logger = LogManager.GetLogger("myAppLoggerRules");
         
 
        //Get login
@@ -26,7 +26,7 @@ namespace Activity1Part3.Controllers
             try
             {
                 //put an item in the log
-                logger.Info("Entering the login controller. Login Method");
+                MyLogger.GetInstance().Info("Entering the login controller. Login Method");
                 if (!ModelState.IsValid)
                     return View("Login");
                 //Call the Security Service Authenticate() method from the Login() method
@@ -36,18 +36,18 @@ namespace Activity1Part3.Controllers
 
                 if (success)
                 {
-                    logger.Info("Exit login controller. Login success");
+                    MyLogger.GetInstance().Info("Exit login controller. Login success");
                     return View("LoginSuccess", user);
                 }
                 else
                 {
-                    logger.Info("Exit login controller. Login failure");
+                    MyLogger.GetInstance().Info("Exit login controller. Login failure");
                     return View("LoginFailure");
                 }
             }
             catch (Exception e)
             {
-                logger.Error("Exception " + e.Message);
+                MyLogger.GetInstance().Error("Exception " + e.Message);
                 return Content("Exception in login", e.Message);
             }
            
