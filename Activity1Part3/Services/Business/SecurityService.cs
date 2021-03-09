@@ -1,4 +1,5 @@
-﻿using Activity1Part3.Services.Data;
+﻿using Activity1Part3.Models;
+using Activity1Part3.Services.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
